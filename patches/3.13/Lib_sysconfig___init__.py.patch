@@ -1,0 +1,11 @@
+--- a/Lib/sysconfig/__init__.py
++++ b/Lib/sysconfig/__init__.py
+@@ -638,6 +638,8 @@
+     machine = machine.replace(' ', '_')
+     machine = machine.replace('/', '-')
+ 
++    if sys.platform == "ohos":
++        return f"ohos-{machine}"
+     if osname[:5] == "linux":
+         if sys.platform == "android":
+             osname = "android"

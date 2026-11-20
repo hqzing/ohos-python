@@ -1,0 +1,75 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -544,6 +544,9 @@
+ 	*-*-linux-android*)
+ 		ac_sys_system=Linux-android
+ 		;;
++	*-*-linux-ohos*)
++		ac_sys_system=Linux-ohos
++		;;
+ 	*-*-linux*)
+ 		ac_sys_system=Linux
+ 		;;
+@@ -566,7 +569,14 @@
+ 	esac
+ 	ac_sys_release=
+     else
+-	ac_sys_system=`uname -s`
++	case "$host" in
++	*-*-linux-ohos*)
++	    ac_sys_system=Linux-ohos
++	    ;;
++	*)
++	    ac_sys_system=`uname -s`
++	    ;;
++	esac
+ 	if test "$ac_sys_system" = "AIX" \
+ 	-o "$ac_sys_system" = "UnixWare" -o "$ac_sys_system" = "OpenUNIX"; then
+ 		ac_sys_release=`uname -v`
+@@ -583,5 +593,6 @@
+     case $MACHDEP in
+ 	aix*) MACHDEP="aix";;
++	linux-ohos*) MACHDEP="ohos";;
+ 	linux*) MACHDEP="linux";;
+ 	cygwin*) MACHDEP="cygwin";;
+ 	darwin*) MACHDEP="darwin";;
+@@ -940,6 +951,17 @@
+ #undef unix
+ #if defined(__ANDROID__)
+     # Android is not a multiarch system.
++#elif defined(__OHOS__)
++# if defined(__aarch64__)
++        aarch64-linux-ohos
++# elif defined(__arm__)
++        arm-linux-ohos
++# elif defined(__x86_64__)
++        x86_64-linux-ohos
++# else
++#  error unknown OpenHarmony platform
++# endif
++
+ #elif defined(__linux__)
+ # if defined(__x86_64__) && defined(__LP64__)
+         x86_64-linux-gnu
+@@ -5236,6 +5260,13 @@
+ dnl FreeBSD defines crypt_r() in <unistd.h>
+ AH_TEMPLATE([HAVE_CRYPT_R], [Define if you have the crypt_r() function.])
+ 
++# The ohos libc exports crypt() from libc.so but has no crypt_r, and the
++# sysroot libcrypt.a is an empty stub. Skip the libxcrypt/crypt_r probes:
++# pkg-config would otherwise find a shared libxcrypt from the build
++# container's brew prefix, and _crypt would gain a run-time dependency the
++# distribution does not ship. The crypt/crypt_r check below then falls back
++# to plain crypt() from libc.
++AS_CASE([$ac_sys_system], [Linux-ohos*], [], [
+ PKG_CHECK_MODULES([LIBCRYPT], [libxcrypt >= 3.1.1], [
+   AC_DEFINE([HAVE_CRYPT_R], [1])
+ ], [
+@@ -5250,6 +5281,7 @@
+       LIBCRYPT_LIBS=${LIBCRYPT_LIBS-$libcrypt}
+     ])
+   ])
++])
+ ])
+ 
+ WITH_SAVE_ENV([

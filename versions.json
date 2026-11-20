@@ -1,0 +1,29 @@
+{
+  "target_triple": "aarch64-unknown-linux-ohos",
+  "pythons": [
+    {
+      "version": "3.12.14",
+      "series": "3.12",
+      "url": "https://www.python.org/ftp/python/3.12.14/Python-3.12.14.tgz",
+      "sha256": "6c6df908d2c3fd24e6d76869e92542abd0f33aec9dfc18df8875f89660286d43"
+    },
+    {
+      "version": "3.13.15",
+      "series": "3.13",
+      "url": "https://www.python.org/ftp/python/3.13.15/Python-3.13.15.tgz",
+      "sha256": "c28d9d213c09b5b5ab2c29812950e12f746999e099b82894231be954b26baed9"
+    },
+    {
+      "version": "3.14.7",
+      "series": "3.14",
+      "url": "https://www.python.org/ftp/python/3.14.7/Python-3.14.7.tgz",
+      "sha256": "62859805f6fdf25e2bcbf3fa3217801e1996887ca33e6a2af80674bdfa2dbe07"
+    },
+    {
+      "version": "3.15.0",
+      "series": "3.15",
+      "url": "https://www.python.org/ftp/python/3.15.0/Python-3.15.0.tgz",
+      "sha256": "438596cac081036d3c1d532ab7e7335eeb35567bc961749a0d5797176db0db68"
+    }
+  ]
+}

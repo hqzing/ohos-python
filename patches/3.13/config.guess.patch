@@ -1,0 +1,13 @@
+--- a/config.guess
++++ b/config.guess
+@@ -156,7 +156,9 @@
+ 	set_cc_for_build
+ 	cat <<-EOF > "$dummy.c"
+ 	#include <features.h>
+-	#if defined(__UCLIBC__)
++	#if defined(__OHOS__)
++	LIBC=ohos
++	#elif defined(__UCLIBC__)
+ 	LIBC=uclibc
+ 	#elif defined(__dietlibc__)
+ 	LIBC=dietlibc

@@ -1,0 +1,35 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -330,6 +330,9 @@
+ 	*-*-linux-android*)
+ 		ac_sys_system=Linux-android
+ 		;;
++	*-*-linux-ohos*)
++		ac_sys_system=Linux-ohos
++		;;
+ 	*-*-linux*)
+ 		ac_sys_system=Linux
+ 		;;
+@@ -361,7 +364,14 @@
+ 	esac
+ 	ac_sys_release=
+     else
+-	ac_sys_system=`uname -s`
++	case "$host" in
++	*-*-linux-ohos*)
++	    ac_sys_system=Linux-ohos
++	    ;;
++	*)
++	    ac_sys_system=`uname -s`
++	    ;;
++	esac
+ 	if test "$ac_sys_system" = "AIX" \
+ 	-o "$ac_sys_system" = "UnixWare" -o "$ac_sys_system" = "OpenUNIX"; then
+ 		ac_sys_release=`uname -v`
+@@ -380,5 +390,6 @@
+ 	freebsd*) MACHDEP="freebsd";;
+ 	linux-android*) MACHDEP="android";;
++	linux-ohos*) MACHDEP="ohos";;
+ 	linux*) MACHDEP="linux";;
+ 	cygwin*) MACHDEP="cygwin";;
+ 	darwin*) MACHDEP="darwin";;

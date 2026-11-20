@@ -1,0 +1,46 @@
+name: build
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    container:
+      image: ghcr.io/hqzing/dockerharmony:latest
+      volumes:
+        - /opt/node24:/__e/node24:rw,rshared
+    steps:
+      # actions/checkout needs Node.js at /__e/node24, which is not included
+      # in the container. This must run before checkout.
+      - name: Setup Node.js for actions
+        run: |
+          pkg=node-v24.2.0-openharmony-arm64
+          curl -fsSLO "https://github.com/hqzing/ohos-node/releases/download/v24.2.0/$pkg.tar.gz"
+          mkdir -p /opt/node24-extract /__e/node24/bin
+          tar -zxf "$pkg.tar.gz" -C /opt/node24-extract
+          ln -sf "/opt/node24-extract/$pkg/bin/node" /__e/node24/bin/node
+          rm "$pkg.tar.gz"
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Build all CPython versions and variants
+        run: ./build.sh --tag "$(date +%Y%m%d)"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: cpython
+          path: dist/*.tar.gz
+          retention-days: 1
