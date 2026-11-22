@@ -9,11 +9,29 @@
          import types
          module = types.ModuleType(name)
          module.build_time_vars = vars
-@@ -805,6 +805,8 @@
+@@ -794,10 +794,13 @@
+
+     # Set for cross builds explicitly
+     if "_PYTHON_HOST_PLATFORM" in os.environ:
+-        return os.environ["_PYTHON_HOST_PLATFORM"]
+-
+-    # Try to distinguish various flavours of Unix
+-    osname, host, release, version, machine = os.uname()
++        if os.environ["_PYTHON_HOST_PLATFORM"].startswith("ohos-"):
++            osname, _, machine = os.environ["_PYTHON_HOST_PLATFORM"].partition('-')
++        else:
++            return os.environ["_PYTHON_HOST_PLATFORM"]
++    else:
++        # Try to distinguish various flavours of Unix
++        osname, host, release, version, machine = os.uname()
+
+     # Convert the OS name to lowercase, remove '/' characters, and translate
+     # spaces (for "Power Macintosh")
+@@ -805,6 +808,8 @@
      machine = machine.replace(' ', '_')
      machine = machine.replace('/', '-')
- 
-+    if sys.platform == "ohos":
+
++    if osname == "ohos" or sys.platform == "ohos":
 +        return f"ohos-{get_config_var('OHOS_API_LEVEL')}-{machine}"
      if osname[:5] == "linux":
          # At least on Linux/Intel, 'machine' is the processor --

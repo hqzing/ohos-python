@@ -27,8 +27,10 @@ from pip._vendor.packaging import tags
 platform_tags = list(tags.platform_tags())
 assert platform_tags == [f"ohos_{build_api}_aarch64"], platform_tags
 
-os.environ["_PYTHON_HOST_PLATFORM"] = f"ohos-{build_api}-aarch64"
-assert sysconfig.get_platform() == os.environ["_PYTHON_HOST_PLATFORM"]
+os.environ["_PYTHON_HOST_PLATFORM"] = "ohos-aarch64"
+sys.platform = "linux"
+assert sysconfig.get_platform() == platform_name
+sys.platform = "ohos"
 del os.environ["_PYTHON_HOST_PLATFORM"]
 
 suffix = sysconfig.get_config_var("EXT_SUFFIX")

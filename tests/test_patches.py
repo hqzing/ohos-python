@@ -41,6 +41,7 @@ class PatchTest(unittest.TestCase):
                 )
                 sysconfig = (ROOT / f"patches/{series}/{sysconfig_name}").read_text()
                 self.assertIn("OHOS_API_LEVEL", sysconfig)
+                self.assertIn('osname == "ohos" or sys.platform == "ohos"', sysconfig)
                 self.assertNotIn('return f"ohos-{machine}"', sysconfig)
 
                 platform = (ROOT / f"patches/{series}/Lib_platform.py.patch").read_text()
