@@ -11,9 +11,9 @@ Standalone CPython builds for OpenHarmony, similar in spirit to [astral-sh/pytho
 For example, CPython 3.15.0:
 
 ```sh
-curl -fLO https://github.com/ohos-python/ohos-python/releases/download/20261120/cpython-3.15.0%2B20261120-aarch64-unknown-linux-ohos-install_only.tar.gz
+curl -fLO https://github.com/ohos-python/ohos-python/releases/download/20261122/cpython-3.15.0%2B20261122-aarch64-unknown-linux-ohos-install_only.tar.gz
 # Users in mainland China can use the AtomGit mirror for faster downloads:
-# curl -fLO https://atomgit.com/ohos-python/ohos-python/releases/download/20261120/cpython-3.15.0%2B20261120-aarch64-unknown-linux-ohos-install_only.tar.gz
+# curl -fLO https://atomgit.com/ohos-python/ohos-python/releases/download/20261122/cpython-3.15.0%2B20261122-aarch64-unknown-linux-ohos-install_only.tar.gz
 
 tar -zxf cpython-*.tar.gz -C "$HOME"
 export PATH="$HOME/python/bin:$PATH"

@@ -1,0 +1,11 @@
+--- a/Lib/sysconfig/__main__.py
++++ b/Lib/sysconfig/__main__.py
+@@ -193,7 +193,7 @@
+     # This is more than sufficient for ensuring the subsequent call to
+     # get_platform() succeeds.
+     name = _get_sysconfigdata_name()
+-    if 'darwin' in sys.platform:
++    if 'darwin' in sys.platform or 'ohos' in sys.platform:
+         import types
+         module = types.ModuleType(name)
+         module.build_time_vars = vars

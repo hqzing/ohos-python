@@ -60,14 +60,13 @@ DEPS_PREFIX=$REPO/.deps
 log() { printf '\n=== %s ===\n' "$*"; }
 
 log "bootstrap build environment (Harmonybrew + devel-base)"
-# Toolchain (devel-base: OHOS SDK clang/lld, GNU patch/make) is required for
-# every build; only the third-party library build is skippable.
+# Toolchain setup is idempotent and also prepares the container's deviceinfo
+# library when the mini rootfs does not provide the real one.
 BREW=/storage/Users/currentUser/.harmonybrew/bin/brew
-if [ ! -x "$BREW" ]; then
-    "$REPO/scripts/setup-env.sh"
-fi
+"$REPO/scripts/setup-env.sh"
 eval "$("$BREW" shellenv)"
-brew install -y devel-base autoconf autoconf-archive automake pkgconf
+
+log "configure OpenHarmony API level (compiler SDK detection)"
 
 if [ "$SKIP_DEPS" = 0 ] && { [ "$REBUILD_DEPS" = 1 ] || [ ! -d "$DEPS_PREFIX/lib" ]; }; then
     log "build pinned dependencies from source"

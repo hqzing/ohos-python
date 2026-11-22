@@ -1,11 +1,20 @@
 --- a/Lib/sysconfig.py
 +++ b/Lib/sysconfig.py
+@@ -512,7 +512,7 @@
+     # This is more than sufficient for ensuring the subsequent call to
+     # get_platform() succeeds.
+     name = _get_sysconfigdata_name()
+-    if 'darwin' in sys.platform:
++    if 'darwin' in sys.platform or 'ohos' in sys.platform:
+         import types
+         module = types.ModuleType(name)
+         module.build_time_vars = vars
 @@ -805,6 +805,8 @@
      machine = machine.replace(' ', '_')
      machine = machine.replace('/', '-')
  
 +    if sys.platform == "ohos":
-+        return f"ohos-{machine}"
++        return f"ohos-{get_config_var('OHOS_API_LEVEL')}-{machine}"
      if osname[:5] == "linux":
          # At least on Linux/Intel, 'machine' is the processor --
          # i386, etc.

@@ -1,11 +1,14 @@
 --- a/Lib/sysconfig/__init__.py
 +++ b/Lib/sysconfig/__init__.py
-@@ -711,6 +711,8 @@
+@@ -711,6 +711,11 @@
              "i686": "x86",
              "x86_64": "x86_64",
          }[machine]
 +    elif sys.platform == "ohos":
-+        return f"ohos-{machine}"
++        if release is None:
++            return os.environ["_PYTHON_HOST_PLATFORM"]
++        osname = "ohos"
++        release = get_config_var("OHOS_API_LEVEL")
      elif osname == "linux":
          # At least on Linux/Intel, 'machine' is the processor --
          # i386, etc.

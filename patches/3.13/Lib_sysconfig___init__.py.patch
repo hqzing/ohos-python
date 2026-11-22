@@ -5,7 +5,7 @@
      machine = machine.replace('/', '-')
  
 +    if sys.platform == "ohos":
-+        return f"ohos-{machine}"
++        return f"ohos-{get_config_var('OHOS_API_LEVEL')}-{machine}"
      if osname[:5] == "linux":
          if sys.platform == "android":
              osname = "android"

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Verify that pip resolves OHOS wheels (ohos_aarch64) no matter what the
+# Verify that pip resolves versioned OHOS wheels (ohos_<api>_aarch64) no matter what the
 # kernel's uname reports: DockerHarmony containers run on a Linux kernel
 # (uname -s = Linux), real OpenHarmony devices may report HarmonyOS.
 # The second case is simulated with an LD_PRELOAD stub (uname-harmonyos.c).
@@ -63,7 +63,7 @@ EOF
     wheel=$(ls "$out"/*.whl 2>/dev/null | head -n 1)
     [ -n "$wheel" ] || { echo "FAIL: no wheel downloaded" >&2; exit 1; }
     case "$wheel" in
-        *ohos_aarch64*) echo "PASS: got OHOS wheel: $(basename "$wheel")" ;;
+        *ohos_[0-9]*_aarch64*) echo "PASS: got OHOS wheel: $(basename "$wheel")" ;;
         *) echo "FAIL: wrong platform wheel: $(basename "$wheel")" >&2; exit 1 ;;
     esac
 }
