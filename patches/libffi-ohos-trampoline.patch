@@ -1,0 +1,49 @@
+--- a/src/tramp.c
++++ b/src/tramp.c
+@@ -51,6 +51,9 @@
+ #include <pthread.h>
+ #include <sys/mman.h>
+ #include <tramp.h>
++#ifdef __OHOS__
++#include <dlfcn.h>
++#endif
+ #ifdef __linux__
+ #include <linux/limits.h>
+ #include <linux/types.h>
+@@ -215,6 +218,36 @@
+   open_flags |= O_CLOEXEC;
+ #endif
+ 
++#ifdef __OHOS__
++  /*
++   * Use dladdr() to resolve libffi's real path for static trampolines.
++   *
++   * In sandboxed OpenHarmony environments /proc/self/maps reports HMDFS
++   * internal paths (e.g. /data/service/el2/100/hmdfs/...) that the process
++   * cannot open, so the static trampoline never initializes and libffi
++   * falls back to dynamic code generation, which W^X policies block.
++   * Resolve the loaded library path through the dynamic linker instead and
++   * derive the trampoline file offset from dli_fbase.
++   */
++  {
++    Dl_info info;
++    if (dladdr ((void *) ffi_tramp_arch, &info) && info.dli_fname)
++      {
++        tramp_globals.fd = open (info.dli_fname, open_flags);
++        if (tramp_globals.fd != -1)
++          {
++            tramp_globals.offset =
++              (off_t) (addr - (uintptr_t) info.dli_fbase);
++            if (tramp_table_alloc ())
++              return 1;
++
++            close (tramp_globals.fd);
++            tramp_globals.fd = -1;
++          }
++      }
++  }
++#endif
++
+   snprintf (file, PATH_MAX, "/proc/%d/maps", getpid());
+   fp = fopen (file, "r");
+   if (fp == NULL)

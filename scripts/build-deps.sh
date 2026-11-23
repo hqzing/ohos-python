@@ -77,6 +77,8 @@ build_zlib() {
 }
 
 build_libffi() {
+    echo "apply libffi-ohos-trampoline.patch"
+    patch -p1 -i "$REPO/patches/libffi-ohos-trampoline.patch"
     ./configure --prefix="$DEPS_PREFIX"
     make -j"$JOBS"
     make install
