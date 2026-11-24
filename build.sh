@@ -176,14 +176,7 @@ build_one() {
         CPPFLAGS="$DEP_INCLUDE" \
         CFLAGS="-D__MUSL__" \
         LDFLAGS="$DEP_LIB -Wl,-z,global $RPATH_BIN $RPATH_LIB $RPATH_DYNLOAD" \
-        PKG_CONFIG_PATH="$DEP_PKGCONFIG" \
-        ac_cv_header_linux_can_h=no \
-        ac_cv_header_linux_can_bcm_h=no \
-        ac_cv_header_linux_can_isotp_h=no \
-        ac_cv_header_linux_can_j1939_h=no \
-        ac_cv_header_linux_can_raw_h=no \
-        ac_cv_can_raw_fd_frames=no \
-        ac_cv_can_raw_join_filters=no
+        PKG_CONFIG_PATH="$DEP_PKGCONFIG"
 
     log "[$REQUEST] make -j$JOBS"
     make -j"$JOBS"
