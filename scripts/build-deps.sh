@@ -88,6 +88,20 @@ build_libffi() {
     make install
 }
 
+build_gettext() {
+    # Only libintl is needed: the OHOS sysroot ships a declaration-less
+    # libintl.h stub, so build the real GNU header + shared library into the
+    # dependency prefix. This enables the _locale gettext bindings.
+    cd gettext-runtime
+    ./configure \
+        --prefix="$DEPS_PREFIX" \
+        --disable-static \
+        --disable-java \
+        --disable-csharp
+    make -j"$JOBS"
+    make install
+}
+
 build_util_linux() {
     ./configure \
         --prefix="$DEPS_PREFIX" \
@@ -155,7 +169,7 @@ build_sqlite() {
     make install
 }
 
-for dep in openssl zlib libffi util-linux xz bzip2 zstd ncurses readline sqlite; do
+for dep in openssl zlib libffi gettext util-linux xz bzip2 zstd ncurses readline sqlite; do
     fetch "$dep"
     func=$(echo "build_$dep" | tr - _)
     "$func"

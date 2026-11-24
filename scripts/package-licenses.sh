@@ -21,6 +21,8 @@ copy_license() {
 copy_license openssl LICENSE.txt
 copy_license zlib LICENSE
 copy_license libffi LICENSE
+copy_license gettext COPYING
+copy_license gettext gettext-runtime/intl/COPYING.LIB
 copy_license util-linux README.licensing
 copy_license util-linux libuuid/COPYING
 copy_license util-linux Documentation/licenses/COPYING.BSD-3-Clause

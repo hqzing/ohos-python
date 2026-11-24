@@ -177,7 +177,6 @@ build_one() {
         CFLAGS="-D__MUSL__" \
         LDFLAGS="$DEP_LIB -Wl,-z,global $RPATH_BIN $RPATH_LIB $RPATH_DYNLOAD" \
         PKG_CONFIG_PATH="$DEP_PKGCONFIG" \
-        ac_cv_header_libintl_h=no \
         ac_cv_header_linux_can_h=no \
         ac_cv_header_linux_can_bcm_h=no \
         ac_cv_header_linux_can_isotp_h=no \

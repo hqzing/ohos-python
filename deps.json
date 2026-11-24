@@ -20,6 +20,16 @@
       "sha256": "f3a3082a23b37c293a4fcd1053147b371f2ff91fa7ea1b2a52e335676bac82dc"
     },
     {
+      "name": "gettext",
+      "version": "0.26",
+      "url": "https://ftpmirror.gnu.org/gettext/gettext-0.26.tar.gz",
+      "fallback_urls": [
+        "https://mirrors.tuna.tsinghua.edu.cn/gnu/gettext/gettext-0.26.tar.gz",
+        "https://mirrors.aliyun.com/gnu/gettext/gettext-0.26.tar.gz"
+      ],
+      "sha256": "39acf4b0371e9b110b60005562aace5b3631fed9b1bb9ecccfc7f56e58bb1d7f"
+    },
+    {
       "name": "util-linux",
       "version": "2.41.3",
       "url": "https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.41/util-linux-2.41.3.tar.gz",
