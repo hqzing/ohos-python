@@ -21,6 +21,7 @@ copy_license() {
 copy_license openssl LICENSE.txt
 copy_license zlib LICENSE
 copy_license libffi LICENSE
+copy_license mpdecimal LICENSE.txt
 copy_license gettext COPYING
 copy_license gdbm COPYING
 copy_license gettext gettext-runtime/intl/COPYING.LIB

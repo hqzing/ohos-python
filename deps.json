@@ -20,6 +20,12 @@
       "sha256": "f3a3082a23b37c293a4fcd1053147b371f2ff91fa7ea1b2a52e335676bac82dc"
     },
     {
+      "name": "mpdecimal",
+      "version": "2.5.1",
+      "url": "https://www.bytereef.org/software/mpdecimal/releases/mpdecimal-2.5.1.tar.gz",
+      "sha256": "9f9cd4c041f99b5c49ffb7b59d9f12d95b683d88585608aa56a6307667b2b21f"
+    },
+    {
       "name": "gettext",
       "version": "0.26",
       "url": "https://ftpmirror.gnu.org/gettext/gettext-0.26.tar.gz",

@@ -167,7 +167,17 @@ build_one() {
     # goes into CFLAGS (not CPPFLAGS) so it propagates to extension builds
     # through _sysconfigdata.
     CONFIGURE_FLAGS=
-    [ "$VARIANT" = freethreaded ] && CONFIGURE_FLAGS=--disable-gil
+
+    if [ "$VARIANT" = freethreaded ]; then
+        CONFIGURE_FLAGS="$CONFIGURE_FLAGS --disable-gil"
+    fi
+
+    # 3.12 defaults to the bundled libmpdec; 3.13+ already default to the
+    # external libmpdec built in .deps.
+    if [ "$SERIES" = 3.12 ]; then
+        CONFIGURE_FLAGS="$CONFIGURE_FLAGS --with-system-libmpdec=yes"
+    fi
+
     ./configure \
         --prefix=/install \
         --enable-shared \

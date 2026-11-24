@@ -88,6 +88,12 @@ build_libffi() {
     make install
 }
 
+build_mpdecimal() {
+    ./configure --prefix="$DEPS_PREFIX"
+    make -j"$JOBS"
+    make install
+}
+
 build_gettext() {
     # Only libintl is needed: the OHOS sysroot ships a declaration-less
     # libintl.h stub, so build the real GNU header + shared library into the
@@ -181,7 +187,7 @@ build_sqlite() {
     make install
 }
 
-for dep in openssl zlib libffi gettext gdbm util-linux xz bzip2 zstd ncurses readline sqlite; do
+for dep in openssl zlib libffi mpdecimal gettext gdbm util-linux xz bzip2 zstd ncurses readline sqlite; do
     fetch "$dep"
     func=$(echo "build_$dep" | tr - _)
     "$func"
