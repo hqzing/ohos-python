@@ -174,7 +174,7 @@ build_one() {
         --with-openssl="$DEPS_PREFIX" \
         $CONFIGURE_FLAGS \
         CPPFLAGS="$DEP_INCLUDE" \
-        CFLAGS="-D__MUSL__" \
+        CFLAGS="-D__MUSL__ -fno-emulated-tls" \
         LDFLAGS="$DEP_LIB -Wl,-z,global $RPATH_BIN $RPATH_LIB $RPATH_DYNLOAD" \
         PKG_CONFIG_PATH="$DEP_PKGCONFIG"
 

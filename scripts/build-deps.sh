@@ -27,7 +27,7 @@ CACHE=${DEPS_CACHE:-$REPO/.build/deps-cache}
 WORK=$REPO/.build/deps
 mkdir -p "$CACHE" "$WORK"
 
-export CFLAGS="-fPIC -O2"
+export CFLAGS="-fPIC -O2 -fno-emulated-tls"
 export CPPFLAGS="-I$DEPS_PREFIX/include"
 export LDFLAGS="-L$DEPS_PREFIX/lib"
 export LD_LIBRARY_PATH="$DEPS_PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
