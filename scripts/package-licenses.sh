@@ -22,6 +22,7 @@ copy_license openssl LICENSE.txt
 copy_license zlib LICENSE
 copy_license libffi LICENSE
 copy_license gettext COPYING
+copy_license gdbm COPYING
 copy_license gettext gettext-runtime/intl/COPYING.LIB
 copy_license util-linux README.licensing
 copy_license util-linux libuuid/COPYING

@@ -102,6 +102,18 @@ build_gettext() {
     make install
 }
 
+build_gdbm() {
+    # --enable-libgdbm-compat also provides ndbm.h + libgdbm_compat, which
+    # lets CPython build both _gdbm and _dbm from this single dependency.
+    ./configure \
+        --prefix="$DEPS_PREFIX" \
+        --disable-static \
+        --disable-nls \
+        --enable-libgdbm-compat
+    make -j"$JOBS"
+    make install
+}
+
 build_util_linux() {
     ./configure \
         --prefix="$DEPS_PREFIX" \
@@ -169,7 +181,7 @@ build_sqlite() {
     make install
 }
 
-for dep in openssl zlib libffi gettext util-linux xz bzip2 zstd ncurses readline sqlite; do
+for dep in openssl zlib libffi gettext gdbm util-linux xz bzip2 zstd ncurses readline sqlite; do
     fetch "$dep"
     func=$(echo "build_$dep" | tr - _)
     "$func"
