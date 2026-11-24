@@ -34,7 +34,11 @@ export LD_LIBRARY_PATH="$DEPS_PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export PKG_CONFIG_PATH="$DEPS_PREFIX/lib/pkgconfig"
 
 fetch() {  # fetch <name> -> cd into extracted source dir
-    block=$(sed -n "/\"name\": \"$1\"/,/sha256/p" "$REPO/deps.json")
+    # Extract the whole dependency object. deps.json is written with
+    # json.dump(indent=2), so an object ends at a line starting with four
+    # spaces followed by "}". Taking the whole object (instead of stopping at
+    # "sha256") keeps optional "fallback_urls" no matter where they appear.
+    block=$(sed -n "/\"name\": \"$1\"/,/^    }/p" "$REPO/deps.json")
     # first URL is canonical; "fallback_urls" (optional) are mirrors with the
     # identical file (same sha256), for networks that cannot reach the origin
     urls=$(echo "$block" | grep -oE '"https?://[^"]+"' | tr -d '"')
