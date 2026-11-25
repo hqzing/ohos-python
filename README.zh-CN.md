@@ -11,9 +11,9 @@
 以 CPython 3.15.0 为例：
 
 ```sh
-curl -fLO https://github.com/ohos-python/ohos-python/releases/download/20261124/cpython-3.15.0%2B20261124-aarch64-unknown-linux-ohos-install_only.tar.gz
+curl -fLO https://github.com/ohos-python/ohos-python/releases/download/20261125/cpython-3.15.0%2B20261125-aarch64-unknown-linux-ohos-install_only.tar.gz
 # 中国大陆用户可使用 AtomGit 镜像加速下载：
-# curl -fLO https://atomgit.com/ohos-python/ohos-python/releases/download/20261124/cpython-3.15.0%2B20261124-aarch64-unknown-linux-ohos-install_only.tar.gz
+# curl -fLO https://atomgit.com/ohos-python/ohos-python/releases/download/20261125/cpython-3.15.0%2B20261125-aarch64-unknown-linux-ohos-install_only.tar.gz
 
 tar -zxf cpython-*.tar.gz -C "$HOME"
 export PATH="$HOME/python/bin:$PATH"
