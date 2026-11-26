@@ -5,7 +5,7 @@
 #   ./build.sh [version[+freethreaded] ...] [--tag YYYYMMDD] [--jobs N] [--skip-deps] [--rebuild-deps]
 #
 # With no version argument, every version in versions.json is built in one
-# run, plus free-threaded builds for 3.14 and 3.15. Third-party dependencies
+# run, plus free-threaded builds for 3.14 through 3.16. Third-party dependencies
 # compile once into .deps/ and are shared by all versions and variants.
 # An explicit version builds only that variant; use +freethreaded for a t build.
 #
@@ -44,7 +44,7 @@ if [ -z "$VERSIONS" ]; then
     while IFS= read -r V; do
         VERSIONS="$VERSIONS $V"
         case "$V" in
-            3.14.*|3.15.*) VERSIONS="$VERSIONS $V+freethreaded" ;;
+            3.14.*|3.15.*|3.16.*) VERSIONS="$VERSIONS $V+freethreaded" ;;
         esac
     done <<EOF
 $(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "$REPO/versions.json")
@@ -106,8 +106,8 @@ build_one() {
     if [ "$VERSION" != "$REQUEST" ]; then
         VARIANT=freethreaded
         case "$VERSION" in
-            3.14.*|3.15.*) ;;
-            *) echo "free-threaded builds are supported only for 3.14 and 3.15: $VERSION" >&2; return 1 ;;
+            3.14.*|3.15.*|3.16.*) ;;
+            *) echo "free-threaded builds are supported only for 3.14 through 3.16: $VERSION" >&2; return 1 ;;
         esac
     fi
     SERIES=$(echo "$VERSION" | cut -d. -f1-2)

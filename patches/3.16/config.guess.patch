@@ -1,0 +1,13 @@
+diff --git a/config.guess b/config.guess
+index cdfc439204..4412302abe 100755
+--- a/config.guess
++++ b/config.guess
+@@ -157,6 +157,8 @@ Linux|GNU|GNU/*)
+ 	cat <<-EOF > "$dummy.c"
+ 	#if defined(__ANDROID__)
+ 	LIBC=android
++	#elif defined(__OHOS__)
++	LIBC=ohos
+ 	#else
+ 	#include <features.h>
+ 	#if defined(__UCLIBC__)

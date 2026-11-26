@@ -24,6 +24,12 @@
       "series": "3.15",
       "url": "https://www.python.org/ftp/python/3.15.0/Python-3.15.0.tgz",
       "sha256": "438596cac081036d3c1d532ab7e7335eeb35567bc961749a0d5797176db0db68"
+    },
+    {
+      "version": "3.16.0a2",
+      "series": "3.16",
+      "url": "https://www.python.org/ftp/python/3.16.0/Python-3.16.0a2.tgz",
+      "sha256": "5a57709402e8ea35e7d95481ba35ce02bda5a57a4eb139d4a312987f6a6dff32"
     }
   ]
 }

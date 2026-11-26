@@ -37,9 +37,10 @@ docker run -dit --name ohos \
   ghcr.io/hqzing/dockerharmony:latest
 docker exec -it ohos sh
 
-./build.sh                         # 四个普通版本，以及 3.14t 和 3.15t
+./build.sh                         # 五个普通版本，以及 3.14t、3.15t 和 3.16t
 ./build.sh 3.15.0                  # 只构建 3.15 普通版
 ./build.sh 3.15.0+freethreaded     # 只构建 3.15 free-threaded 版
+./build.sh 3.16.0a2                # 只构建 3.16 预览普通版
 ./build.sh 3.15.0 --skip-deps      # 重复构建普通版时不重新编译依赖
 ```
 

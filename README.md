@@ -37,9 +37,10 @@ docker run -dit --name ohos \
   ghcr.io/hqzing/dockerharmony:latest
 docker exec -it ohos sh
 
-./build.sh                         # all four regular versions plus 3.14t and 3.15t
+./build.sh                         # all five regular versions plus 3.14t, 3.15t, and 3.16t
 ./build.sh 3.15.0                  # only the regular 3.15 build
 ./build.sh 3.15.0+freethreaded     # only the free-threaded 3.15 build
+./build.sh 3.16.0a2                # only the regular 3.16 preview build
 ./build.sh 3.15.0 --skip-deps      # repeat a regular build without rebuilding dependencies
 ```
 

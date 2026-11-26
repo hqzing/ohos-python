@@ -17,7 +17,8 @@ import re
 from pathlib import Path
 
 ARTIFACT_RE = re.compile(
-    r"cpython-(?P<version>\d+\.\d+\.\d+(?P<prerelease>(a|b|rc)\d+)?)"
+    r"cpython-(?P<version>(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)"
+    r"(?P<prerelease>(a|b|rc)\d+)?)"
     r"\+(?P<build>\d+)-aarch64-unknown-linux-ohos"
     r"(?P<freethreaded>-freethreaded)?-install_only\.tar\.gz$"
 )
@@ -43,7 +44,7 @@ def main():
         if not m:
             continue
         version = m["version"]
-        major, minor, patch = map(int, version.split("-")[0].split("."))
+        major, minor, patch = (int(m[part]) for part in ("major", "minor", "patch"))
         url = (
             f"https://github.com/{args.repo}/releases/download/{args.tag}/"
             + name.replace("+", "%2B")
